@@ -20,5 +20,53 @@
         <servlet-name>HelloWorld</servlet-name>
         <url-pattern>/hello</url-pattern>
     </servlet-mapping>
+
+    <servlet>
+        <servlet-name>EventTypes</servlet-name>
+        <servlet-class>EventTypes</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EventTypes</servlet-name>
+        <url-pattern>/events/types</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>User</servlet-name>
+        <servlet-class>User</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>User</servlet-name>
+        <url-pattern>/current</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Invite</servlet-name>
+        <servlet-class>Invite</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Invite</servlet-name>
+        <url-pattern>/invites</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Friends</servlet-name>
+        <servlet-class>Friends</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Friends</servlet-name>
+        <url-pattern>/friends</url-pattern>
+    </servlet-mapping>
+
+    <servlet>
+        <servlet-name>Events</servlet-name>
+        <servlet-class>Events</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Events</servlet-name>
+        <url-pattern>/events</url-pattern>
+    </servlet-mapping>
+
+
  
 </web-app>

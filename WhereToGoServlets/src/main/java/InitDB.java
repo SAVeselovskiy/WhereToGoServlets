@@ -10,7 +10,7 @@ public class InitDB {
     public InitDB() throws SQLException, ClassNotFoundException {
         Class.forName("org.postgresql.Driver");
         connection = DriverManager.getConnection(
-                "jdbc:postgresql://54.200.192.248:5432/WhereToGo", "postgres", "serga464");
+                "jdbc:postgresql://54.200.192.248:5432/WhereToGo", "postgres", "serega");
         stmt = connection.createStatement();
     }
 

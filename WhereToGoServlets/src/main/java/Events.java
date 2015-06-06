@@ -1,3 +1,6 @@
+import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
+
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
 import javax.servlet.http.HttpServletRequest;
@@ -7,21 +10,15 @@ import java.io.PrintWriter;
 import java.io.StringWriter;
 import java.sql.ResultSet;
 import java.sql.SQLException;
-import org.postgresql.Driver;
-import org.json.simple.JSONArray;
-import org.json.simple.JSONObject;
 
 /**
- * Created by Admin on 04.06.2015.
+ * Created by Admin on 06.06.2015.
  */
-public class EventTypes extends HttpServlet{
-    int id = 0;
-    String name = "";
-
+public class Events extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
         response.setContentType("text/html");
-
+        int typeId = Integer.parseInt(req.getParameter("type"));
         PrintWriter out = response.getWriter();
         InitDB db = null;
         try {
@@ -35,15 +32,24 @@ public class EventTypes extends HttpServlet{
         }
         if (db != null){
             try {
-                String sql = "SELECT * FROM event_type" + ";";
+                String sql = "SELECT * FROM event WHERE type_id = " + typeId + ";";
                 JSONArray wrapper = new JSONArray();
                 ResultSet rs = db.getRs(sql);
                 while(rs.next()) {
-                    id = rs.getInt(2);
-                    name = rs.getString(1);
+                    int id = rs.getInt(7);
+                    String name = rs.getString(2);
+                    String description = rs.getString(3);
+                    String start_date = rs.getString(4);
+                    String end_date = rs.getString(6);
+
                     JSONObject obj=new JSONObject();
                     obj.put("id",id);
                     obj.put("name",name);
+                    obj.put("description",description);
+                    obj.put("start_date", start_date);
+                    if (end_date != null) {
+                        obj.put("end_date",end_date);
+                    }
                     wrapper.add(obj);
                 }
                 JSONObject obj = new JSONObject();
@@ -64,3 +70,4 @@ public class EventTypes extends HttpServlet{
             response.sendError(400, "Can't connect to database");
     }
 }
+

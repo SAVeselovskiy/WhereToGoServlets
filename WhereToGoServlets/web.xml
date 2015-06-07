@@ -66,7 +66,38 @@
         <servlet-name>Events</servlet-name>
         <url-pattern>/events</url-pattern>
     </servlet-mapping>
+    <servlet>
+        <servlet-name>TestImage</servlet-name>
+        <servlet-class>TestImage</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>TestImage</servlet-name>
+        <url-pattern>/image</url-pattern>
+    </servlet-mapping>
 
 
+    <servlet>
+        <servlet-name>EventPhoto</servlet-name>
+        <servlet-class>EventPhoto</servlet-class>
+    </servlet>
+
+    <servlet-mapping>
+        <servlet-name>EventPhoto</servlet-name>
+        <url-pattern>/events/*/photo</url-pattern>
+    </servlet-mapping>
+
+    <!--<filter>-->
+        <!--<filter-name>UrlFilterForEvents</filter-name>-->
+        <!--<filter-class>UrlFilterForEvents</filter-class>-->
+    <!--</filter>-->
+
+    <!--<filter-mapping>-->
+        <!--<filter-name>UrlFilterForEvents</filter-name>-->
+        <!--<servlet-name>EventPhoto</servlet-name>-->
+    <!--</filter-mapping>-->
+    <!--<filter-mapping>-->
+        <!--<filter-name>UrlFilterForEvents</filter-name>-->
+        <!--<servlet-name>EventTypes</servlet-name>-->
+    <!--</filter-mapping>-->
  
 </web-app>

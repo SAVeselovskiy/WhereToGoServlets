@@ -50,8 +50,8 @@ public class Friends extends HttpServlet {
                 String jsonText = json.toString();
                 out.print(jsonText);
                 db.closeAll();
-                out.print(wrapper);
-                db.closeAll();
+//                out.print(wrapper);
+//                db.closeAll();
             }
             catch (SQLException e1){
                 e1.printStackTrace();

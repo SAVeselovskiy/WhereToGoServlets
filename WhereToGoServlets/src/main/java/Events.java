@@ -17,7 +17,7 @@ import java.sql.SQLException;
 public class Events extends HttpServlet {
     @Override
     protected void doGet(HttpServletRequest req, HttpServletResponse response) throws ServletException, IOException {
-        response.setContentType("text/html");
+        response.setContentType("text/html;charset=UTF-8");
         int typeId = Integer.parseInt(req.getParameter("type"));
         PrintWriter out = response.getWriter();
         InitDB db = null;
@@ -36,11 +36,11 @@ public class Events extends HttpServlet {
                 JSONArray wrapper = new JSONArray();
                 ResultSet rs = db.getRs(sql);
                 while(rs.next()) {
-                    int id = rs.getInt(7);
+                    int id = rs.getInt(6);
                     String name = rs.getString(2);
                     String description = rs.getString(3);
                     String start_date = rs.getString(4);
-                    String end_date = rs.getString(6);
+                    String end_date = rs.getString(5);
 
                     JSONObject obj=new JSONObject();
                     obj.put("id",id);

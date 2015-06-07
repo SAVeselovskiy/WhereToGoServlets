@@ -19,7 +19,7 @@ public class User extends HttpServlet {
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int vk_id = Integer.parseInt(req.getParameter("vkId"));
         PrintWriter out = resp.getWriter();
-        resp.setContentType("application/x-www-form-urlencoded");
+        resp.setContentType("application/x-www-form-urlencoded;charset=UTF-8");
         InitDB db = null;
         try {
             db = new InitDB();

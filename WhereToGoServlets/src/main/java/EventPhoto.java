@@ -22,17 +22,17 @@ public class EventPhoto extends HttpServlet {
         resp.setContentType("image/jpeg");
         String pathToWeb = getServletContext().getRealPath(File.separator);
         try{
-        File f = new File(pathToWeb + "/icons/event_"+ id +".jpg");
-        BufferedImage bi = ImageIO.read(f);
-            if (bi == null){
+            File f = new File(pathToWeb + "/icons/event_"+ id +".jpg");
+            if (!f.exists()){
                 resp.sendError(404,"Файл в системе не найден.");
                 return;
             }
-        OutputStream out = resp.getOutputStream();
-        ImageIO.write(bi, "jpg", out);
-        out.close();
+            BufferedImage bi = ImageIO.read(f);
+            OutputStream out = resp.getOutputStream();
+            ImageIO.write(bi, "jpg", out);
+            out.close();
         }catch (Exception e){
-            resp.sendError(404,"Файл в системе не найден.");
+            resp.sendError(400,e.getLocalizedMessage());
         }
     }
 }

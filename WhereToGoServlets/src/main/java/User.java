@@ -1,4 +1,3 @@
-import org.json.simple.JSONArray;
 import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
@@ -17,7 +16,7 @@ import java.sql.SQLException;
 public class User extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        int vk_id = Integer.parseInt(req.getParameter("vkId"));
+        int vk_id = Integer.parseInt(req.getParameter("id"));
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/x-www-form-urlencoded;charset=UTF-8");
         InitDB db = null;
@@ -33,14 +32,12 @@ public class User extends HttpServlet {
 
         if (db != null) {
             try {
-                String checkSql = "SELECT * FROM users WHERE vk_id = " + vk_id + ");";
-                ResultSet rs = db.getRs(checkSql);
-                if (!rs.next()){
-                    String sql = "INSERT INTO users (vk_id) VALUES(" + vk_id + ");";
+
+                    String sql = "INSERT INTO users (vk_id) SELECT " + vk_id + " WHERE NOT EXISTS (SELECT * FROM users WHERE users.vk_id="+vk_id+");";
 
                     db.update(sql);
                     db.closeAll();
-                }
+
 
                 JSONObject obj = new JSONObject();
                 obj.put("status", "ok");
@@ -51,7 +48,7 @@ public class User extends HttpServlet {
             } catch (SQLException e1) {
                 e1.printStackTrace();
                 out.println(e1.getMessage());
-                resp.sendError(403, e1.getLocalizedMessage());
+                resp.sendError(404, e1.getLocalizedMessage());
             }
         }
         else{

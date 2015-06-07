@@ -1,4 +1,5 @@
 import org.json.simple.JSONArray;
+import org.json.simple.JSONObject;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -41,12 +42,16 @@ public class Friends extends HttpServlet {
                     userId = rs.getInt(1);
                     for (int i = 0; i < friends.length; i++) {
                         if (friends[i] == userId){
-                            wrapper.add(userId);
+                            JSONObject object = new JSONObject();
+                            object.put("id",userId);
+                            wrapper.add(object);
                         }
                     }
                 }
                 StringWriter json = new StringWriter();
-                wrapper.writeJSONString(json);
+                JSONObject object = new JSONObject();
+                object.put("friends",wrapper);
+                object.writeJSONString(json);
                 String jsonText = json.toString();
                 out.print(jsonText);
                 db.closeAll();

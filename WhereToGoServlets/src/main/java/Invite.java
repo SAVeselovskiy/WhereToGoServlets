@@ -68,7 +68,7 @@ public class Invite extends HttpServlet {
     @Override
     protected void doPost(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         int senderId = Integer.parseInt(req.getParameter("senderId"));
-        int receiverId = Integer.parseInt(req.getParameter("receiverId"));
+        String receiverId = req.getParameter("receiverId");
         int eventId = Integer.parseInt(req.getParameter("eventId"));
         PrintWriter out = resp.getWriter();
         resp.setContentType("application/x-www-form-urlencoded");
@@ -83,11 +83,16 @@ public class Invite extends HttpServlet {
             resp.sendError(402, e.getLocalizedMessage());
         }
 
+        String[] identifires = receiverId.split(",");
+
         if (db != null) {
             try {
-                String sql = "INSERT INTO invite (sender_id,receiver_id,event_id) VALUES(" + senderId + "," + receiverId + "," + eventId + ");";
+                for (int i = 0; i < identifires.length; i++) {
+                    int receiver = Integer.parseInt(identifires[i]);
+                    String sql = "INSERT INTO invite (sender_id,receiver_id,event_id) VALUES(" + senderId + "," + receiver + "," + eventId + ");";
+                    db.update(sql);
+                }
                 JSONObject obj = new JSONObject();
-                db.update(sql);
                 db.closeAll();
                 obj.put("status", "ok");
                 out.print(obj);

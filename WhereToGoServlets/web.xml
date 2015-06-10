@@ -76,14 +76,28 @@
     </servlet-mapping>
 
 
+
     <servlet>
-        <servlet-name>EventPhoto</servlet-name>
-        <servlet-class>EventPhoto</servlet-class>
-    </servlet>
+    <servlet-name>EventPhoto</servlet-name>
+    <servlet-class>EventPhoto</servlet-class>
+</servlet>
 
     <servlet-mapping>
         <servlet-name>EventPhoto</servlet-name>
-        <url-pattern>/events/*/photo</url-pattern>
+        <url-pattern>/photo/*</url-pattern>
+    </servlet-mapping>
+
+
+
+
+
+    <servlet>
+        <servlet-name>Favorites</servlet-name>
+        <servlet-class>FavoritesServlet</servlet-class>
+    </servlet>
+    <servlet-mapping>
+        <servlet-name>Favorites</servlet-name>
+        <url-pattern>/favorites</url-pattern>
     </servlet-mapping>
 
     <!--<filter>-->

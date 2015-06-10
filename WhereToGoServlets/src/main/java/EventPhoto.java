@@ -24,7 +24,7 @@ public class EventPhoto extends HttpServlet {
         try{
             File f = new File(pathToWeb + "/icons/event_"+ id +".jpg");
             if (!f.exists()){
-                resp.sendError(404,"Файл в системе не найден.");
+                resp.sendError(404,pathToWeb + "/icons/event_"+ id +".jpg");
                 return;
             }
             BufferedImage bi = ImageIO.read(f);

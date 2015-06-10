@@ -7,18 +7,20 @@ import java.util.regex.Pattern;
  */
 public class RestRequest {
     private Pattern regExEventPhoto = Pattern.compile("/events/([0-9]+)/photo");
+    private  Pattern regExPhoto = Pattern.compile("/photo/([0-9]+)");
     private Integer id;
     private boolean isPhoto = false;
 
     public RestRequest(String pathInfo) throws ServletException {
         Matcher matcher;
 
-        matcher = regExEventPhoto.matcher(pathInfo);
+        matcher = regExPhoto.matcher(pathInfo);
         if (matcher.find()){
             id = Integer.parseInt(matcher.group(1));
             isPhoto = true;
             return;
         }
+
         throw new ServletException("Invalid URI" + pathInfo);
     }
     public int getId(){
